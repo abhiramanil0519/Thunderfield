@@ -12,8 +12,10 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
+% Research Title
 \title{Thunderfield}
 
+% Author Block 
 \author{\IEEEauthorblockN{Abhiram Anil}
 \IEEEauthorblockA{\textit{School of Computer Science} \\
 \textit{RV University}\\
@@ -43,31 +45,36 @@ adithiyaakalakandanbtech24@rvu.edu.in}
 
 \maketitle
 
+% Abstract
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Large-scale distributed deep learning workloads running on GPU clusters often suffer from energy inefficiencies caused by bursty inter-GPU communication. These short communication bursts increase network congestion, synchronization delay, and power consumption, leading to a higher Energy Delay Product (EDP). 
+
+In this work, we propose DL-AMCC, a learning based runtime controller that dynamically forms temporary GPU micro clusters during communication bursts. The system observes traffic and system telemetry and adjusts cluster behavior to reduce cross rack communication and improve energy efficiency. 
+
+We evaluate DL-AMCC in a large-scale GPU cluster simulator under realistic distributed training workloads. Results show that our approach reduces Energy Delay Product and communication overhead while maintaining overall training performance.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+Deep Learning, Temporal Graph Neural Networks, Reinforcement Learning, GPU Clusters, Distributed Deep Learning, Energy Efficiency, Energy-Delay Product, Inter-GPU Communication, Runtime Optimization, Traffic-Aware Micro-Clustering
 \end{IEEEkeywords}
 
+% Introduction
 \section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
 
-\section{Ease of Use}
+Modern deep learning models are trained using \textit{large scale} GPU clusters, where multiple GPUs work together to process different parts of the same model. In distributed training, each GPU computes gradients locally and then communicates with other GPUs to synchronize these updates. This communication is required to keep the model parameters consistent across all devices. Operations such as all reduce are commonly used for this synchronization process.
 
-\subsection{Maintaining the Integrity of the Specifications}
+Although distributed training improves computational speed, it introduces heavy inter-GPU communication. These synchronization steps occur repeatedly during training and often create short but intense communication bursts. During such bursts, network traffic increases sharply, GPUs may wait for synchronization to complete, and power consumption can temporarily spike. As cluster sizes grow, these effects reduce energy efficiency and increase the Energy Delay Product.
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+Most existing cluster management systems make decisions at job launch time and do not adapt to runtime communication dynamics. As a result, systems cannot respond effectively to \textit{burst driven} inefficiencies that arise during training.
+
+To address this limitation, we present \textbf{Thunderfield}, an autonomous runtime framework for \textit{burst aware} GPU cluster control. Thunderfield is built around DL-AMCC, a deep learning based control mechanism that dynamically forms temporary GPU micro clusters during communication bursts. By observing traffic and system telemetry, Thunderfield adjusts cluster behavior in real time to reduce \textit{cross rack} communication and improve energy efficiency without degrading performance.
+
+The main contributions of this work are:
+\begin{itemize}
+    \item Thunderfield, a \textit{burst aware} runtime micro clustering framework for GPU clusters.
+    \item DL-AMCC, a deep learning based controller that predicts and responds to communication dynamics.
+    \item A \textit{large scale} simulation study demonstrating improvements in Energy Delay Product while maintaining throughput.
+\end{itemize}
 
 \section{Prepare Your Paper Before Styling}
 Before you begin to format your paper, first write and save the content as a 
